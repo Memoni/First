@@ -8,7 +8,7 @@
 
 <body class="easyui-layout">
 <div data-options="region:'north',border:false"style="height:60px;overflow: hidden">
-  <div style="float: left"><img style="height:60px;" src="images/Logo.jpg"/></div>
+  <div style="float: left"><img style="height:60px;" src="/images/timage.png"/></div>
 </div>
 <div data-options="region:'west',split:true,title:'菜单'" style="width:200px;padding:10px;">
   <ul id="tt1" class="easyui-tree" data-options="animate:true,dnd:true">
@@ -32,22 +32,9 @@
 <div data-options="region:'center'">
   <div id="tt" class="easyui-tabs" data-options="tools:'#tab-tools',border:false,fit:true" >
     <div title="首页" data-options="tools:'#p-tools'">
-      <iframe style="height:100%;width:100%" align="center" id="winframe" onload="setIframe()" frameborder="no" border="0"   src="/user/show">
+      <iframe style="height:100%;width:100%" align="center" id="winframe"  frameborder="no" border="0"   src="/user/show">
       </iframe>
     </div>
   </div>
 </div>
 </body>
-
-<hr/>
-<script>
-  $(function(){
-  })
-</script>
-<form method="post" action="/user/save">
-  <%= tag(:input, :type => "hidden", :name =>request_forgery_protection_token.to_s, :value =>form_authenticity_token) %>
-  name<input name="name" value="jack"><br/>
-  age<input name="age"value="15"><br/>
-  password<input name="password"value="p123"><br/>
-  <input type="submit" vlaue="submit">
-</form>
