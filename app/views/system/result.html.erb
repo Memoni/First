@@ -1,0 +1,9 @@
+<h1>System#result</h1>
+<%= params[:result]  %>
+---
+<br/><br/><br/>
+<%= link_to "test",{:controller =>'system',:action => 'index',:class=>'ttt',:method => 'post'} %>
+<%= params[:controller] %>
+<%= params.inspect %>
+
+<%= Abc1.test({:ttt=>'cccccc',:ttt2=>'ttttttt'}) %>

@@ -1,0 +1,20 @@
+<h1>User#show</h1>
+<hr>
+<style>
+    tr td{
+        border: 1px solid #0093ff;
+        width: 100px;
+        text-align: right;
+    }
+</style>
+<%= link_to "deleteAll",user_deleteAll_path  %>
+<table>
+  <% @users.each { |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.age %></td>
+        <td><%= user.password %></td>
+      </tr>
+  <% } %>
+</table>
