@@ -7,14 +7,9 @@ First::Application.routes.draw do
   post "user/save"
   get "user/deleteAll"
 
-  get "system/index"
-  get "system/login"
-  get "system/logout"
-  get "system/createUser"
-  get "system/result"
-  get "system/find"
   #resources :posts
   get "welcome/index"
+  get "welcome/homePage"
   #resources :user
   root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.

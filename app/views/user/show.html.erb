@@ -9,6 +9,12 @@
 </style>
 <%= link_to "deleteAll",user_deleteAll_path  %>
 <table>
+  <tr>
+    <td>id</td>
+    <td>name</td>
+    <td>age</td>
+    <td>password</td>
+  </tr>
   <% @users.each { |user| %>
       <tr>
         <td><%= user.id %></td>

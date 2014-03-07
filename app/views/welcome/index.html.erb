@@ -1,4 +1,89 @@
-<h1>welcome index </h1>
-<%= link_to "createOne and then find all and show up",system_createUser_path %><br>
-<%= link_to "show user list",controller: "system" %></br>
-<%= link_to "show user list by index path",system_login_path %>
+<%= javascript_include_tag "/easyui/jquery.easyui.min.js" %>
+<%= javascript_include_tag "/easyui/locale/easyui-lang-zh_CN.js" %>
+<%= stylesheet_link_tag "/easyui/themes/metro/easyui.css" %>
+<%= stylesheet_link_tag "/easyui/themes/icon.css" %>
+<script type="text/javascript">
+    $(function () {
+        //init the home page
+        $('#tab').tabs('add', {
+            title: 'Home',
+            fit: true,
+            content: '<iframe style="height:100%;width:100%" align="center"  frameborder="no" border="0"  src="/welcome/homePage"></iframe>'
+        });
+        //
+        $('#tree').tree({
+            onDblClick: function (node) {
+                //双击编辑节点
+                //$('#tree').tree('beginEdit',node.target)
+            },
+            //click event resolver
+            onClick: function (node) {
+                url=(parseUrl(node))
+                addTab(url, url)
+            }
+        });
+        //展开所有节点
+        var roots = $('#tree').tree('getRoots');
+        for (var i = 0; i < roots.length; i++) {
+            $('#tree').tree('expandAll', roots[i].target)
+        }
+    })
+
+    //解析请求路径
+    function parseUrl(node) {
+        var parent = $('#tree').tree('getParent', node.target)
+        if (parent != null && parent != undefined) {
+            return parseUrl(parent) + '/' + node.text
+        } else {
+            return '/'+node.text
+        }
+    }
+    function parseTabname() {
+
+    }
+
+
+    function addTab(tabName, url) {
+        //重复检查
+        if ($('#tab').tabs('exists', tabName)) {
+            //选中已存在的tab页
+            $('#tab').tabs('select', tabName)
+            return;
+        }
+        $('#tab').tabs('add', {
+            title: tabName,
+            fit: true,
+            content: '<iframe style="height:100%;width:100%" align="center"  frameborder="no" border="0"   src="' + url + '"></iframe>',
+            closable: true
+        });
+    }
+</script>
+<body class="easyui-layout">
+<div data-options="region:'north',border:false" style="height:60px;overflow: hidden">
+  <div style="float: left"><img style="height:60px;" src="/images/timage.png"/></div>
+</div>
+<div data-options="region:'west',split:true,title:'菜单'" style="width:200px;padding:10px;">
+  <ul id="tree" class="easyui-tree" data-options="animate:true,dnd:true">
+    <li data-options="state:'closed'">
+      <span>user</span>
+      <ul>
+        <li>index</li>
+        <li>show</li>
+        <li>flow1</li>
+      </ul>
+    </li>
+    <li data-options="state:'closed'">
+      <span>temp</span>
+      <ul>
+        <li>index</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<div data-options="region:'east',split:true,collapsed:true,title:'工具'" style="width:100px;padding:10px;">
+  <!-- 待处理  添加一下功能性比较强的模块 --><%= welcome_homePage_path %>
+</div>
+<div data-options="region:'center'">
+  <div id="tab" class="easyui-tabs" data-options="tools:'#tab-tools',border:false,fit:true"></div>
+</div>
+</body>
